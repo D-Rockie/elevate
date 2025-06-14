@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate - Freelancing Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#FF6B35',secondary:'#FFFFFF',customBackground:'#000000'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* New creative animations */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-text.delay-200 {
+            transition-delay: 100ms;
+        }
+        .reveal-text.delay-400 {
+            transition-delay: 200ms;
+        }
+        .reveal-text.delay-600 {
+            transition-delay: 300ms;
+        }
+        .text-gradient {
+            background: linear-gradient(45deg, #FF6B35, #FF8F6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+        .hover-glow:hover {
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react-bits@1.0.0/dist/react-bits.min.js"></script>
+</head>
+<body class="bg-black">
+    <!-- Header & Navigation -->
+    <header class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl bg-black/80 backdrop-blur-md shadow-[0_0_15px_rgba(255,107,53,0.3)] border border-primary/20 rounded-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <!-- Logo in Header (replaced with image) -->
+            <a href="#">
+                <img src="images/logo.png" alt="Elevate Logo" class="h-6">
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-5">
+                <a href="#home" class="nav-link text-white hover:text-primary transition-colors duration-300 text-xs font-medium">Home</a>
+                <a href="#about" class="nav-link text-white hover:text-primary transition-colors duration-300 text-xs font-medium">About Us</a>
+                <a href="#portfolio" class="nav-link text-white hover:text-primary transition-colors duration-300 text-xs font-medium">Services</a>
+                <a href="#contact" class="nav-link text-white hover:text-primary transition-colors duration-300 text-xs font-medium">Contact</a>
+                <a href="#footer" class="nav-link text-white hover:text-primary transition-colors duration-300 text-xs font-medium">Quick Links</a>
+            </nav>
+            
+            <a href="#contact" class="hidden md:block bg-primary text-white px-4 py-1 !rounded-full text-xs font-medium hover:shadow-lg transition-all duration-300 whitespace-nowrap">Get Started</a>
+            
+            <button class="md:hidden w-7 h-7 flex items-center justify-center text-white" id="mobile-menu-button">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-black/90 backdrop-blur-md w-full absolute top-full left-0 shadow-lg rounded-b-2xl py-3 px-4 space-y-2" id="mobile-menu">
+            <a href="#home" class="block py-1.5 text-white hover:text-primary transition-colors duration-300 text-xs">Home</a>
+            <a href="#about" class="block py-1.5 text-white hover:text-primary transition-colors duration-300 text-xs">About Us</a>
+            <a href="#portfolio" class="block py-1.5 text-white hover:text-primary transition-colors duration-300 text-xs">Services</a>
+            <a href="#contact" class="block py-1.5 text-white hover:text-primary transition-colors duration-300 text-xs">Contact</a>
+            <a href="#footer" class="block py-1.5 text-white hover:text-primary transition-colors duration-300 text-xs">Quick Links</a>
+            <a href="#contact" class="block w-full bg-primary text-white text-center px-4 py-1.5 !rounded-full text-xs font-medium hover:shadow-lg transition-all duration-300 whitespace-nowrap">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-black z-50 transition-opacity duration-500">
+        <div class="text-center flex flex-col items-center">
+            <h1 class="text-6xl md:text-8xl font-bold text-[#FF6B35] opacity-0 animate-[fadeIn_1s_ease-out_forwards] font-['Archivo_Black']">
+                elevate
+            </h1>
+            <div class="mt-6 w-1/3 min-w-[150px] h-2 bg-gray-300 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-[#FF6B35] w-0 transition-all duration-1000 ease-out"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+        <div id="vanta-background" class="absolute inset-0 z-0"></div>
+        <div id="three-canvas" class="absolute inset-0 z-5"></div>
+        <div id="particles-js" class="absolute inset-0 z-6"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-2xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight opacity-0 transition-opacity duration-500" id="hero-title">
+                    <div class="mb-2"><span id="elevate-text" class="text-primary font-['Archivo_Black'] font-black">elevate</span></div>
+                    <div><span class="text-white">Your</span> <span class="text-white">Digital</span> <span class="text-white">Presence</span></div>
+                </h1>
+                <p class="text-xl md:text-2xl text-white mb-8 opacity-0 transition-opacity duration-500" id="hero-subtitle">Transform your ideas into impactful digital experiences with our premium freelancing services.</p>
+                <div class="flex flex-wrap gap-4 justify-center opacity-0 transition-opacity duration-500" id="hero-buttons">
+                    <a href="#portfolio" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:shadow-lg transition-all duration-300 whitespace-nowrap">View Services</a>
+                    <a href="#contact" class="border-2 border-primary text-primary px-8 py-3 !rounded-button font-medium hover:bg-primary/5 transition-all duration-300 whitespace-nowrap">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three.js for 3D Rotating Sphere -->
+    <script>
+        // Three.js for rotating sphere with texture
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, canvas: document.getElementById('three-canvas') });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+
+        // Create sphere with texture
+        const sphereGeometry = new THREE.SphereGeometry(2, 32, 32);
+        const textureLoader = new THREE.TextureLoader();
+        const sphereTexture = textureLoader.load('https://threejs.org/examples/textures/2294472375_24a3b8ef46_o.jpg'); // Abstract glowing texture
+        const sphereMaterial = new THREE.MeshPhongMaterial({ map: sphereTexture, shininess: 100 });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.set(0, 0, 0);
+        scene.add(sphere);
+
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 5, 5);
+        scene.add(directionalLight);
+
+        camera.position.z = 5;
+
+        // Mouse interaction
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            sphere.rotation.y += 0.01;
+            sphere.rotation.x += 0.01;
+            sphere.rotation.x = mouseY * 0.3;
+            sphere.rotation.y += mouseX * 0.3;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.render(scene, camera);
+        });
+    </script>
+
+    <!-- Vanta.js for enhanced wave background -->
+    <script>
+        VANTA.WAVES({
+            el: "#vanta-background",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.50,
+            scaleMobile: 1.20,
+            color: 0x000000,
+            waveColor: 0xFF6B35,
+            shininess: 100.00,
+            waveHeight: 50.00,
+            waveSpeed: 1.0,
+            zoom: 1.20
+        });
+    </script>
+
+    <!-- Particles.js for particle effect -->
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#FF6B35' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: false },
+                move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+    </script>
+
+    <!-- Loading screen and simple fade-in animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure loading screen is visible initially
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.display = 'flex';
+            loadingScreen.style.opacity = '1';
+
+            // Set initial states of hero elements
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const heroButtons = document.getElementById('hero-buttons');
+            
+            // Make elements visible but with opacity 0
+            heroTitle.style.display = 'block';
+            heroSubtitle.style.display = 'block';
+            heroButtons.style.display = 'block';
+            heroTitle.style.opacity = '0';
+            heroSubtitle.style.opacity = '0';
+            heroButtons.style.opacity = '0';
+
+            let width = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Fade out loading screen
+                    loadingScreen.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        
+                        // Quick fade in of all elements
+                        heroTitle.style.opacity = '1';
+                        heroSubtitle.style.opacity = '1';
+                        heroButtons.style.opacity = '1';
+
+                        // Initialize decrypted text effect immediately
+                        initDecryptedText();
+
+                        // Initialize background animations
+                        renderer.render(scene, camera);
+                    }, 200);
+                } else {
+                    width += 5;
+                    progressBar.style.width = `${width}%`;
+                }
+            }, 30);
+        });
+
+        // Decrypted text effect
+        function initDecryptedText() {
+            const text = "elevate";
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            let iterations = 0;
+            const maxIterations = 2;
+            const interval = 30;
+
+            const element = document.getElementById('elevate-text');
+            const originalText = element.textContent;
+
+            function updateText() {
+                element.textContent = originalText
+                    .split("")
+                    .map((letter, index) => {
+                        if (index < iterations) {
+                            return originalText[index];
+                        }
+                        return characters[Math.floor(Math.random() * characters.length)];
+                    })
+                    .join("");
+
+                if (iterations >= originalText.length) {
+                    clearInterval(intervalId);
+                    element.textContent = originalText;
+                }
+
+                iterations += 1 / maxIterations;
+            }
+
+            const intervalId = setInterval(updateText, interval);
+        }
+    </script>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-black relative overflow-hidden">
+       
+            
+
+            <!-- About Elevate Section -->
+            <div class="max-w-5xl mx-auto">
+                <div class="relative">
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-primary/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 right-1/2 transform translate-x-1/2 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                    
+                    <!-- Main content -->
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">
+                            About <span class="text-primary relative hover-glow">
+                                elevate
+                                <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary/30 via-primary to-primary/30 transform scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></span>
+                            </span>
+                        </h2>
+                        <div class="space-y-4">
+                            <p class="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                                Elevate is a hybrid growth powerhouse built for modern creators, coaches, and founders.
+                            </p>
+                            <p class="text-lg text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                                Our core? Websites and landing pages that don't just look good - they convert, load fast, and speak your brand's truth.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Core values grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 fade-in">
+                        <div class="text-center group">
+                            <div class="w-16 h-16 mx-auto mb-6 relative">
+                                <div class="absolute inset-0 bg-primary/10 rounded-full blur-lg group-hover:bg-primary/20 transition-all duration-300"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <i class="ri-rocket-line ri-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-white">Branded Builds</h3>
+                            <p class="text-gray-400 leading-relaxed">Fast, converting websites that speak your brand's truth.</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="w-16 h-16 mx-auto mb-6 relative">
+                                <div class="absolute inset-0 bg-primary/10 rounded-full blur-lg group-hover:bg-primary/20 transition-all duration-300"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <i class="ri-user-heart-line ri-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-white">Personal Branding</h3>
+                            <p class="text-gray-400 leading-relaxed">Making you the standout face of your brand.</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="w-16 h-16 mx-auto mb-6 relative">
+                                <div class="absolute inset-0 bg-primary/10 rounded-full blur-lg group-hover:bg-primary/20 transition-all duration-300"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <i class="ri-line-chart-line ri-2x text-primary"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-white">Lead Generation</h3>
+                            <p class="text-gray-400 leading-relaxed">From clicks to clients: crafting systems that convert prospects at scale.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mission statement -->
+                    <div class="relative max-w-4xl mx-auto">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-full blur-3xl"></div>
+                        <div class="relative text-center">
+                            <p class="text-2xl md:text-3xl font-light text-white mb-8 leading-loose">
+                                "This isn't just digital work — it's <span class="text-primary font-medium font-['Homemade_Apple'] whitespace-nowrap">personal brand architecture</span>. In a world full of noise, your brand deserves to be <span class="text-primary font-medium font-['Poppins']">sharp</span>, <span class="text-primary font-medium font-['Poppins']">simple</span>, and <span class="text-primary font-medium font-['Poppins'] whitespace-nowrap">unforgettable</span>."
+                            </p>
+                            <div class="space-y-4">
+                               
+                                <a href="#contact" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
+                                    Start Your Journey
+                                    <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-primary/20 to-black"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-3xl mx-auto fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to <span class="text-primary">elevate</span> Your Digital Presence?</h2>
+                <p class="text-xl mb-8 text-gray-200">Let's collaborate to create something exceptional that helps you stand out in the digital landscape.</p>
+                <a href="#contact" class="inline-block bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-primary/90 hover:shadow-lg transition-all duration-300 whitespace-nowrap">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Showcase Section -->
+    <section id="portfolio" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Our <span class="text-primary">Services</span></h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">Discover how our comprehensive services can transform your digital presence and drive business growth.</p>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Service 1 -->
+                <div class="service-card opacity-0 transform translate-x-[-100px] transition-all duration-1000 ease-out" id="website-creation">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-white">Website Creation</h3>
+                    <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+                        <div class="relative">
+                            <img src="images/website.jpg" alt="Website Creation" class="w-full h-64 object-cover object-top">
+                            <a href="#contact" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap">Learn More</a>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-center items-center text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-center">Transform your vision into a stunning digital presence with our custom website development services. We create responsive, user-friendly websites that convert visitors into customers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card opacity-0 transform translate-x-[100px] transition-all duration-1000 ease-out" id="lead-generation">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-white">Lead Generation</h3>
+                    <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+                        <div class="relative">
+                            <img src="images/leads.jpg" alt="Lead Generation" class="w-full h-64 object-cover object-top">
+                            <a href="#contact" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap">Learn More</a>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-center items-center text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-center">Expand your professional network and generate quality leads through our strategic LinkedIn outreach services. We help you build meaningful connections that drive business growth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card opacity-0 transform translate-x-[-100px] transition-all duration-1000 ease-out" id="script-content">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-white">Script & Content Planning</h3>
+                    <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+                        <div class="relative">
+                            <img src="images/script.jpg" alt="Script & Content Planning" class="w-full h-64 object-cover object-top">
+                            <a href="#contact" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap">Learn More</a>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-center items-center text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-center">Create compelling content that resonates with your audience. Our expert team crafts engaging scripts and develops content strategies that tell your brand's story effectively.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card opacity-0 transform translate-x-[100px] transition-all duration-1000 ease-out" id="carousel-posts">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-white">Carousel Posts Planning</h3>
+                    <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+                        <div class="relative">
+                            <img src="images/carousel.jpg" alt="Carousel Posts Planning" class="w-full h-64 object-cover object-top">
+                            <a href="#contact" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap">Learn More</a>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-center items-center text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-center">Maximize your social media impact with our strategic carousel post planning. We create visually appealing, informative carousels that drive engagement and brand awareness.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card opacity-0 transform translate-x-[-100px] transition-all duration-1000 ease-out" id="digital-strategy">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-white">Digital Strategy</h3>
+                    <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+                        <div class="relative">
+                            <img src="images/marketing.jpg" alt="Digital Strategy" class="w-full h-64 object-cover object-top">
+                            <a href="#contact" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap">Learn More</a>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-center items-center text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-center">Develop a winning digital strategy that aligns with your business goals. Our comprehensive approach combines multiple services to create a cohesive online presence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card opacity-0 transform translate-x-[100px] transition-all duration-1000 ease-out" id="competitive-analysis">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-white">Competitive Analysis</h3>
+                    <div class="portfolio-item rounded-lg overflow-hidden shadow-md">
+                        <div class="relative">
+                            <img src="images/cp.jpg" alt="Competitive Analysis" class="w-full h-64 object-cover object-top">
+                            <a href="#contact" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors duration-300 whitespace-nowrap">Learn More</a>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-center items-center text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-center">Gain a strategic edge with our comprehensive competitive analysis services. We analyze market trends, competitor strategies, and industry benchmarks to help you make informed business decisions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#contact" class="inline-block bg-primary text-white px-8 py-3 !rounded-button font-medium hover:shadow-lg transition-all duration-300 whitespace-nowrap">Start Your Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking & Contact Section -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Get In <span class="text-primary">Touch</span></h2>
+                <p class="text-gray-300 max-w-2xl mx-auto">Schedule a consultation with our experts to discuss your project and explore how we can help elevate your digital presence.</p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto space-y-12">
+                <!-- Booking Calendar -->
+                <div class="fade-in">
+                    <div class="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 shadow-[0_0_15px_rgba(255,107,53,0.2)] border border-primary/20">
+                        <h3 class="text-2xl font-semibold mb-6 text-white text-center">Book a Meeting</h3>
+                        <!-- Cal.com Embed Code -->
+                        <div class="cal-embed" style="width:100%;height:600px;overflow:scroll;background:#000000;" data-cal-link="elevate/30min">
+                            <script type="text/javascript">
+                                (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar.slice(2)) : p(api, ar); return; } p(cal, ar); }; })(window, "https://cal.com/embed.js", "init");
+                                Cal("init", {origin:"https://cal.com"});
+                                Cal("inline", {
+                                    elementOrSelector:".cal-embed",
+                                    calLink:"devaesh-d-rockie/30min",
+                                    config: {
+                                        name: "Elevate",
+                                        theme: "dark",
+                                        hideEventTypeDetails: false,
+                                        layout: "month_view"
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="fade-in">
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <!-- Email Section -->
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium mb-1 text-white">Email Us</h4>
+                                    <p class="text-primary"><a href="mailto:Kailashathreyainelevate@gmail.com" class="hover:text-primary/80 transition-colors duration-300">Kailashathreyainelevate@gmail.com</a></p>
+                                    <p class="text-primary"><a href="mailto:devaeshinelevate@gmail.com" class="hover:text-primary/80 transition-colors duration-300">devaeshinelevate@gmail.com</a></p>
+                                </div>
+                            </div>
+                            
+                            <!-- Social Media Section -->
+                            <div>
+                                <h4 class="font-medium mb-3 text-white">Follow elevate</h4>
+                                <div class="flex space-x-4">
+                                    <a href="#" class="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <i class="ri-linkedin-fill text-primary group-hover:text-white"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/elevate._inc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <i class="ri-instagram-fill text-primary group-hover:text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Founders Section -->
+                            <div>
+                                <h4 class="font-medium mb-3 text-white">Know Us More</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <!-- Kailash Athreya -->
+                                    <div class="founder-social-card group bg-gray-800 p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                                        <h5 class="text-sm font-medium text-white mb-2">Kailash Athreya</h5>
+                                        <div class="flex space-x-2">
+                                            <a href="https://www.linkedin.com/in/kailash-natarajan-6b14a7325" class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                                <i class="ri-linkedin-fill text-primary group-hover:text-white"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com/kailash.athreya?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                                <i class="ri-instagram-fill text-primary group-hover:text-white"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Devaesh -->
+                                    <div class="founder-social-card group bg-gray-800 p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                                        <h5 class="text-sm font-medium text-white mb-2">Devaesh</h5>
+                                        <div class="flex space-x-2">
+                                            <a href="https://www.linkedin.com/in/devaesh-d-287812307" class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                                <i class="ri-linkedin-fill text-primary group-hover:text-white"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com/devaeshd_19?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                                <i class="ri-instagram-fill text-primary group-hover:text-white"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Function to handle service cards animation
+        function initServiceCards() {
+            const serviceCardsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                        serviceCardsObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+                serviceCardsObserver.observe(card);
+            });
+        }
+
+        // Function to handle fade-in animations
+        function initFadeIn() {
+            const fadeElements = document.querySelectorAll('.fade-in, .reveal-text');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+        }
+
+        // Initialize animations when the page loads
+        window.addEventListener('load', () => {
+            initServiceCards();
+            initFadeIn();
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-black text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <!-- Logo in Footer (replaced with image) -->
+                    <a href="#">
+                        <img src="images/logo.png" alt="Elevate Logo" class="h-10 mb-6">
+                    </a>
+                    <p class="text-gray-400 mb-6">Transforming ideas into impactful digital experiences with our premium freelancing services.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <i class="ri-linkedin-fill text-primary group-hover:text-white"></i>
+                        </a>
+                        <a href="https://www.instagram.com/elevate._inc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center social-icon group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            <i class="ri-instagram-fill text-primary group-hover:text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-primary transition-colors duration-300">About Us</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-primary transition-colors duration-300">Services</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors duration-300">Contact</a></li>
+                        <li><a href="#footer" class="text-gray-400 hover:text-primary transition-colors duration-300">Quick Links</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Our Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#website-creation" class="text-gray-400 hover:text-primary transition-colors duration-300">Website Creation</a></li>
+                        <li><a href="#lead-generation" class="text-gray-400 hover:text-primary transition-colors duration-300">Lead Generation</a></li>
+                        <li><a href="#script-content" class="text-gray-400 hover:text-primary transition-colors duration-300">Script & Content Planning</a></li>
+                        <li><a href="#carousel-posts" class="text-gray-400 hover:text-primary transition-colors duration-300">Carousel Posts Planning</a></li>
+                        <li><a href="#digital-strategy" class="text-gray-400 hover:text-primary transition-colors duration-300">Digital Strategy</a></li>
+                        <li><a href="#competitive-analysis" class="text-gray-400 hover:text-primary transition-colors duration-300">Competitive Analysis</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>© 2025 Elevate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your public key
+        (function() {
+            try {
+                emailjs.init("GxPFlZFpRz8yRhxTq");
+                console.log('EmailJS initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize EmailJS:', error);
+            }
+        })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
